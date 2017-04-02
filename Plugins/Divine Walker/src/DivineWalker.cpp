@@ -6,7 +6,7 @@
 
 
 const char* PluginN = "Divine Walker";
-const int Version = 1.0;
+const float Version = 1.0;
 
 const Vec3 UP_AXIS = Vec3(0, 0, 1), RIGHT_AXIS = Vec3(1, 0, 0);
 const float CooldownT = 0.2;
