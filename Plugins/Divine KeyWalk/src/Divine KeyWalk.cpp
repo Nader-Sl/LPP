@@ -5,19 +5,18 @@
 
 
 
-const char* PluginN = "Divine Walker";
+const char* PluginN = "Divine KeyWalk";
 const float Version = 1.0;
 
 const Vec3 UP_AXIS = Vec3(0, 0, 1), RIGHT_AXIS = Vec3(1, 0, 0);
 const float CooldownT = 0.2;
 float LastT;
 bool HadManualInput;
-
 IUnit* MyPlayer;
 
 
 PluginSetup(pluginN);
- 
+
 PLUGIN_EVENT(void) OnGameUpdate()
 {
 	short UpState = GetAsyncKeyState(VK_NUMPAD8);
@@ -25,7 +24,7 @@ PLUGIN_EVENT(void) OnGameUpdate()
 	short LeftState = GetAsyncKeyState(VK_NUMPAD4);
 	short RightState = GetAsyncKeyState(VK_NUMPAD6);
 
-	if (HadManualInput && (!UpState && !DownState && !LeftState && !RightState) )
+	if (HadManualInput && (!UpState && !DownState && !LeftState && !RightState))
 	{
 		GGame->IssueOrder(MyPlayer, eGameObjectOrder::kHoldPosition, MyPlayer->ServerPosition());
 		HadManualInput = false;
@@ -41,9 +40,9 @@ PLUGIN_EVENT(void) OnGameUpdate()
 	Vec3 xStep = RIGHT_AXIS*StepSize;
 	Vec3 zStep = UP_AXIS*StepSize;
 
-	if (UpState || DownState) MoveDest += UpState?zStep:-zStep;
-	if (RightState  || LeftState) MoveDest += RightState ? xStep : -xStep;
-		
+	if (UpState || DownState) MoveDest += UpState ? zStep : -zStep;
+	if (RightState || LeftState) MoveDest += RightState ? xStep : -xStep;
+
 	if (MoveDest != CurrPos)
 	{
 		HadManualInput = true;
@@ -64,5 +63,5 @@ PLUGIN_API void OnLoad(IPluginSDK* PluginSDK)
 
 PLUGIN_API void OnUnload()
 {
-	GEventManager->RemoveEventHandler(kEventOnGameUpdate, OnGameUpdate);	 
+	GEventManager->RemoveEventHandler(kEventOnGameUpdate, OnGameUpdate);
 }
